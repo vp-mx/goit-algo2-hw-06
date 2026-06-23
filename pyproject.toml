@@ -1,0 +1,6 @@
+[project]
+name = "goit-algo2-hw-06"
+version = "0.1.0"
+description = "HW-6: Bloom Filter та HyperLogLog for work with huge data"
+requires-python = ">=3.10"
+dependencies = []
