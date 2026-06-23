@@ -19,8 +19,8 @@ from typing import Iterator
 
 from hyperloglog import HyperLogLog
 
-# Regular expression for IPv4 address at the start of a log file line.
-IP_PATTERN = re.compile(r"^(\d{1,3}(?:\.\d{1,3}){3})")
+# Regular expression to extract IPv4 address from JSON log.
+IP_PATTERN = re.compile(r'"remote_addr"\s*:\s*"(\d{1,3}(?:\.\d{1,3}){3})"')
 
 
 def _is_valid_ip(ip: str) -> bool:
@@ -38,7 +38,7 @@ def load_ip_addresses(file_path: str) -> Iterator[str]:
     """
     with open(file_path, "r", encoding="utf-8", errors="ignore") as fh:
         for line in fh:
-            match = IP_PATTERN.match(line)
+            match = IP_PATTERN.search(line)
             if not match:
                 continue
             ip = match.group(1)
